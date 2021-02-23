@@ -16,7 +16,7 @@ class Bot(metaclass=ABCMeta):
     like initializing connection and running the main loop.
     """
 
-    def __init__(self, jid, passwd, name, white_list):
+    def __init__(self, jid, passwd, name, white_list, log_level):
         """
         Initializes with parameters, sets logging level. Adds the receive_message
         method as callback for a message dispatcher.
@@ -24,12 +24,14 @@ class Bot(metaclass=ABCMeta):
         @param passwd: password of the account as string
         @param name: a name for the bot
         @param white_list: a list of JIDs from which messages are accepted
+        @param log_level: the log level to set
         """
         self.jid = jid
         self.passwd = passwd
         self.HELP = "Help text"
         self.name = name
-        logging.basicConfig(level=logging.DEBUG)
+        logging.basicConfig(level=log_level)
+        self.log = logging.getLogger(name)
         self.white_list = white_list
         self.tick_interval = 5
         self.client = None
@@ -51,7 +53,7 @@ class Bot(metaclass=ABCMeta):
         Do the connecting stuff. Purges password variable after successful
         connecting.
         """
-        print("### Bot " + self.name + " connecting... ###")
+        self.log_msg("### Bot " + self.name + " connecting... ###", logging.DEBUG)
         self.client = aioxmpp.PresenceManagedClient(
             aioxmpp.JID.fromstr(self.jid), aioxmpp.make_security_layer(self.passwd))
         #avatar_service = self.client.summon(aioxmpp.avatar.AvatarService)
@@ -59,7 +61,7 @@ class Bot(metaclass=ABCMeta):
         dispatcher = self.client.summon(aioxmpp.dispatcher.SimpleMessageDispatcher)
         dispatcher.register_callback(aioxmpp.MessageType.CHAT, None, self._receive_message)
         async with self.client.connected() as stream:
-            print("### Bot " + self.name + " is connected ###")
+            self.log_msg("### Bot " + self.name + " is connected ###", logging.DEBUG)
             self.passwd = None
             while True:
                 await asyncio.sleep(self.tick_interval)
@@ -127,7 +129,7 @@ class Bot(metaclass=ABCMeta):
         """
         Stops the bot.
         """
-        print("### stopping Bot " + self.name + "... ###")
+        self.log_msg("### stopping Bot " + self.name + "... ###", logging.DEBUG)
         self.client.stop()
         while self.client.running:
             time.sleep(1)
@@ -154,3 +156,11 @@ class Bot(metaclass=ABCMeta):
         @return: the running state
         """
         return self.client.running
+
+    def log_msg(self, msg, level):
+        """
+        Log message with root logger.
+        @param msg: the message to log
+        @param level: the log level
+        """
+        self.log.log(level, msg)

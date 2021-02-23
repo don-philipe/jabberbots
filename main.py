@@ -5,13 +5,14 @@ import sys
 import json
 import asyncio
 import signal
+import logging
 from bots.TestBot import TestBot
 from bots.WttrBot import WttrBot
 
 
 def main(argv):
     config = read_config()
-    bots = create_bots(config)
+    bots = create_bots(config, log_level=logging.DEBUG)
     mainloop = asyncio.get_event_loop()
     mainloop.add_signal_handler(signal.SIGINT, stop_bots, bots)
     mainloop.call_soon(run_bots, bots, mainloop)
@@ -32,7 +33,7 @@ def read_config():
     return config
 
 
-def create_bots(config):
+def create_bots(config, log_level):
     """
     @return: the list of all bots created by this method
     """
@@ -42,10 +43,10 @@ def create_bots(config):
             if key == "type":
                 bot_added = False
                 if config[bot][key] == "TestBot":
-                    bots.append(TestBot(config[bot]["jid"], config[bot]["password"], bot, None))
+                    bots.append(TestBot(config[bot]["jid"], config[bot]["password"], bot, None, log_level))
                     bot_added = True
                 elif config[bot][key] == "WttrBot":
-                    bots.append(WttrBot(config[bot]["jid"], config[bot]["password"], bot, None))
+                    bots.append(WttrBot(config[bot]["jid"], config[bot]["password"], bot, None, log_level))
                     bot_added = True
 
                 if bot_added:

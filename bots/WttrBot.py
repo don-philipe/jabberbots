@@ -5,6 +5,7 @@ from bots.Bot import Bot  # added in favor of 'import Bot' for unit testing
 import urllib.request
 import urllib.parse
 import re
+import logging
 
 
 class WttrBot(Bot):
@@ -23,7 +24,7 @@ class WttrBot(Bot):
         The answer string from wttr is then returned to the requesting user.
         @param message: the message should be only characters and whitespaces
         """
-        print(message.body.any())
+        self.log_msg("Looking for weather at " + message.body.any(), logging.DEBUG)
         city = re.search("^[A-ZÄÖÜa-zäöüß ]*$", message.body.any())
         if city is not None and len(city.group()) > 1:
             quoted_city = urllib.parse.quote(city.group())

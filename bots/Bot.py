@@ -18,7 +18,7 @@ class Bot(metaclass=ABCMeta):
 
     def __init__(self, jid, passwd, name, white_list):
         """
-        Initializes with parameters, sets logging level. Adds the recieveMessage
+        Initializes with parameters, sets logging level. Adds the receive_message
         method as callback for a message dispatcher.
         @param jid: jabber-ID of the account as string
         @param passwd: password of the account as string
@@ -132,14 +132,14 @@ class Bot(metaclass=ABCMeta):
         while self.client.running:
             time.sleep(1)
 
+    @abstractmethod
     def register_job(self):
         """
         Register a job that runs on the server and notifies
         the (jabber)client on specified events or after a
         specified period of time.
-        @throws NotImplementedError: if not overridden
         """
-        raise NotImplementedError
+        pass
 
     def _get_help(self, jid):
         """

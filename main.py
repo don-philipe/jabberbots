@@ -6,12 +6,10 @@ import json
 import asyncio
 import signal
 from bots.TestBot import TestBot
-from bots.TwitchLiveBot import TwitchLiveBot
 from bots.WttrBot import WttrBot
 
 
 def main(argv):
-    # TODO wipe earlier git versions as they contain login data
     config = read_config()
     bots = create_bots(config)
     mainloop = asyncio.get_event_loop()
@@ -42,15 +40,15 @@ def create_bots(config):
     for bot in config:
         for key in config[bot]:
             if key == "type":
-                botAdded = False
+                bot_added = False
                 if config[bot][key] == "TestBot":
                     bots.append(TestBot(config[bot]["jid"], config[bot]["password"], bot, None))
-                    botAdded = True
+                    bot_added = True
                 elif config[bot][key] == "WttrBot":
                     bots.append(WttrBot(config[bot]["jid"], config[bot]["password"], bot, None))
-                    botAdded = True
+                    bot_added = True
 
-                if botAdded:
+                if bot_added:
                     print("### added " + bot + " ###")
     return bots
 

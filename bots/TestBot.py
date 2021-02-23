@@ -9,6 +9,9 @@ class TestBot(Bot):
     Just for testing base bot functionalities.
     """
 
+    def register_job(self):
+        pass
+
     def message_handler(self, message):
         pass
 

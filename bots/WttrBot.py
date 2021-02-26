@@ -15,10 +15,11 @@ class WttrBot(Bot):
     TODO: use JSON format for forecast https://wttr.in/Nuremberg?format=j1
     """
 
+    def _init_help_text(self):
+        self.HELP = "Send location name to get weather information about it."
+
     def custom_config(self, config):
         pass
-
-    HELP = "Send location name to get weather information about it."
 
     def message_handler(self, message):
         """
@@ -38,11 +39,6 @@ class WttrBot(Bot):
             answer = "Location name should consist of characters and spaces " \
                      "only."
         Bot.send_message(self, answer, message.from_)
-
-    def register_job(self):
-        """
-        """
-        pass
 
     def bot_tick(self):
         """

@@ -9,10 +9,10 @@ class TestBot(Bot):
     Just for testing base bot functionalities.
     """
 
-    def custom_config(self, config):
+    def _init_help_text(self):
         pass
 
-    def register_job(self):
+    def custom_config(self, config):
         pass
 
     def message_handler(self, message):

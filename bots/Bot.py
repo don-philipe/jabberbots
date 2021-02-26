@@ -31,6 +31,7 @@ class Bot(metaclass=ABCMeta):
         self.jid = jid
         self.passwd = passwd
         self.HELP = "Help text"
+        self._init_help_text()
         self.name = name
         logging.basicConfig(level=log_level)
         self.log = logging.getLogger(name)
@@ -147,11 +148,10 @@ class Bot(metaclass=ABCMeta):
             time.sleep(1)
 
     @abstractmethod
-    def register_job(self):
+    def _init_help_text(self):
         """
-        Register a job that runs on the server and notifies
-        the (jabber)client on specified events or after a
-        specified period of time.
+        Add the help message text to self.HELP which will be reported when
+        user types "help".
         """
         pass
 

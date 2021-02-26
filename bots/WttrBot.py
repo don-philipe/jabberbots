@@ -15,6 +15,9 @@ class WttrBot(Bot):
     TODO: use JSON format for forecast https://wttr.in/Nuremberg?format=j1
     """
 
+    def custom_config(self, config):
+        pass
+
     HELP = "Send location name to get weather information about it."
 
     def message_handler(self, message):

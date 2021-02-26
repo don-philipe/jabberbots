@@ -3,6 +3,9 @@
         "type": "Bot",
         "jid": "",
         "password": "",
-        "tick_interval": 5
+        "tick_interval": 5,
+        "custom_config": {
+            "foo": "bar"
+        }
     }
 }

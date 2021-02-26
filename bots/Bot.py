@@ -16,7 +16,7 @@ class Bot(metaclass=ABCMeta):
     like initializing connection and running the main loop.
     """
 
-    def __init__(self, jid, passwd, name, white_list, log_level):
+    def __init__(self, jid, passwd, name, white_list, log_level, tick_interval=5):
         """
         Initializes with parameters, sets logging level. Adds the receive_message
         method as callback for a message dispatcher.
@@ -25,6 +25,7 @@ class Bot(metaclass=ABCMeta):
         @param name: a name for the bot
         @param white_list: a list of JIDs from which messages are accepted
         @param log_level: the log level to set
+        @param tick_interval: the interval between two bot ticks in seconds (default: 5)
         """
         self.jid = jid
         self.passwd = passwd
@@ -33,7 +34,7 @@ class Bot(metaclass=ABCMeta):
         logging.basicConfig(level=log_level)
         self.log = logging.getLogger(name)
         self.white_list = white_list
-        self.tick_interval = 5
+        self.tick_interval = tick_interval
         self.client = None
         #self.avatar = self._init_avatar()
 

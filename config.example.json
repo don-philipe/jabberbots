@@ -2,6 +2,7 @@
     "botname": {
         "type": "Bot",
         "jid": "",
-        "password": ""
+        "password": "",
+        "tick_interval": 5
     }
 }

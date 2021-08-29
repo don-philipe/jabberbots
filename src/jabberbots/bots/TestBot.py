@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.8
 # -*- coding: utf-8 -*-
 
-from bots.Bot import Bot
+from src.jabberbots.bots.Bot import Bot
 
 
 class TestBot(Bot):

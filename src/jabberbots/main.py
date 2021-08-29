@@ -6,8 +6,8 @@ import json
 import asyncio
 import signal
 import logging
-from bots.TestBot import TestBot
-from bots.WttrBot import WttrBot
+from src.jabberbots.bots.TestBot import TestBot
+from src.jabberbots.bots.WttrBot import WttrBot
 
 
 def main(argv):

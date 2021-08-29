@@ -59,6 +59,7 @@ response for simple request when stream in live:
 - notification bots for other e.g. chat systems
 - picture of the day/week/month - sends a picture from e.g. a nextcloud share to the subscriber on a daily/weekly/monthly basis
 - html update bot - checks for changes in website and notifies about that
+- github bot that notifies about updates in issues you are watching etc.
 
 ## more features
 - XEP-0084 - avatar for bots (https://docs.zombofant.net/aioxmpp/0.10/api/public/avatar.html#module-aioxmpp.avatar)

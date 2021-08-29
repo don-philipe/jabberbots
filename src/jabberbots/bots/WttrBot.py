@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.8
 # -*- coding: utf-8 -*-
 
-from bots.Bot import Bot  # added in favor of 'import Bot' for unit testing
+from src.jabberbots.bots.Bot import Bot  # added in favor of 'import Bot' for unit testing
 import urllib.request
 import urllib.parse
 import re

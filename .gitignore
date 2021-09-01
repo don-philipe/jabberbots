@@ -3,3 +3,5 @@
 __pycache__
 .ropeproject
 config.json
+jabberbots.egg-info
+dist

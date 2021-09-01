@@ -8,7 +8,7 @@ setup(
     name='jabberbots',
     version='0.0.1',
     description='A set of bots for jabber/xmpp',
-    packages=find_packages(where='src'),
+    packages=find_packages(include=['src.*']),
     python_requires='>=3.8',
     install_requires=[
         'aioopenssl==0.5.1',
@@ -33,5 +33,10 @@ setup(
     ],
     package_data={
         'config': ['config.example.json'],
+    },
+    entry_points={
+        'console_scripts': [
+            'start=jabberbots:main',
+        ],
     },
 )
